@@ -1,0 +1,58 @@
+#title {
+ 
+    font-family: "Press Start 2P";
+    text-align: center;
+    font-size: 50px;
+    color: hsl(248, 39%, 39%);
+   border-bottom: 5px;
+   border-color: aliceblue;
+   
+}
+body
+{
+    background-color: black;
+}
+#stupidassbox1 {
+    width: 30%;
+    align-self: center;
+    height: 20%;
+    border: 2px solid;
+    background-size: contain;
+border-radius: 6px;
+   color: azure;
+   animation: rgb 3s ;
+   animation-iteration-count: infinite;
+   position: absolute;
+ 
+  z-index: 15;
+  top: 30%;
+  left: 43%;
+  margin: -100px 0 0 -150px;
+}
+#stupidassbox2 {
+    width: 30%;
+    align-self: center;
+    height: 20%;
+    border: 2px solid;
+    background-size: contain;
+border-radius: 6px;
+   color: azure;
+   animation: rgb 3s ;
+   animation-iteration-count: infinite;
+   position: absolute;
+ 
+  z-index: 15;
+  top: 55%;
+  left: 43%;
+  margin: -100px 0 0 -150px;
+}
+
+@keyframes rgb {
+  0%  {border-color: red;}
+  20%  {border-color: orange;}
+  40%  {border-color: yellow;}
+  60%  {border-color: green;}
+  80%  {border-color: blue;}
+  100%  {border-color: red;}
+  
+}
