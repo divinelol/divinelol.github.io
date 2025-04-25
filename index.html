@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>doxbin.pics</title>
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #1a1a1a;
+            font-family: Arial, sans-serif;
+            flex-direction: column;
+        }
+        .container {
+            background-color: #2c2c2c;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+            text-align: center;
+            position: relative;
+        }
+        .title {
+            color: #00ff88;
+            font-size: 48px;
+            font-weight: bold;
+            text-transform: uppercase;
+            margin-bottom: 30px;
+          
+        }
+        .buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+        .button {
+            background: none;
+            border: none;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+        .button:hover {
+            transform: scale(1.2);
+        }
+        .button img {
+            width: 60px;
+            height: 60px;
+        }
+        .audio-control {
+            margin-top: 20px;
+            background-color: #2c2c2c;
+            padding: 10px 20px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .play-pause {
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 24px;
+            color: #00ff88;
+        }
+        .time {
+            color: #00ff88;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="title">fudcrypters</div>
+        <div class="buttons">
+            <a href="https://t.me/fudcrypterz" target="_blank" class="button">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg" alt="Telegram">
+            </a>
+          
+        </div>
+    </div>
+    <div class="audio-control">
+        <button class="play-pause" id="playPause">▶</button>
+        <span class="time" id="currentTime">0:00</span>
+        <span class="time">/</span>
+        <span class="time" id="duration">0:00</span>
+    </div>
+    <audio id="audio" loop>
+        <source src="https://github.com/divinelol/divinelol.github.io/raw/refs/heads/main/pinnedpaste.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+    <script>
+        const audio = document.getElementById('audio');
+        const playPause = document.getElementById('playPause');
+        const currentTime = document.getElementById('currentTime');
+        const duration = document.getElementById('duration');
+
+        function formatTime(seconds) {
+            const min = Math.floor(seconds / 60);
+            const sec = Math.floor(seconds % 60);
+            return `${min}:${sec < 10 ? '0' : ''}${sec}`;
+        }
+
+        audio.addEventListener('loadedmetadata', () => {
+            duration.textContent = formatTime(audio.duration);
+        });
+
+        audio.addEventListener('timeupdate', () => {
+            currentTime.textContent = formatTime(audio.currentTime);
+        });
+
+        playPause.addEventListener('click', () => {
+            if (audio.paused) {
+                audio.play();
+                playPause.textContent = '❚❚';
+            } else {
+                audio.pause();
+                playPause.textContent = '▶';
+            }
+        });
+    </script>
+</body>
+</html>
