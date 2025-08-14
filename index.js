@@ -21,14 +21,14 @@ const closeBtn = document.getElementById('closePlayer');
 const progress = document.getElementById('progress');
 const albumArt = document.getElementById('albumArt');
 
-// Example playlist 
+// Example playlist
 const playlist = [
   {file:'ik ben het maar.mp3', art:'https://i.scdn.co/image/ab67616d0000b273b116ea79716f8a6cdd39404b'},
   {file:'Love You Anymore.mp3', art:'https://i.scdn.co/image/ab67616d0000b2735f70e605cc07b6cbb16ec20c'},
-  {file:'Gorgeous.mp3', art:'https://i.scdn.co/image/ab67616d0000b273d9194aa18fa4c9362b47464f'},
-    {file:'simswarm.mp3', art:'https://i.scdn.co/image/ab67616d0000b2739ec66d199c19d227f5c37a68'}
+  {file:'Gorgeous.mp3', art:'https://i.scdn.co/image/ab67616d0000b273d9194aa18fa4c9362b47464f'}
 ];
 let currentIndex = 0;
+
 // --------------------
 // About Me elements
 const aboutMe = document.getElementById('aboutMe');
@@ -64,7 +64,7 @@ function loadSong(index){
   audioPlayer.src = playlist[index].file;
   songTitle.textContent = playlist[index].file.replace('.mp3','');
   albumArt.src = playlist[index].art;
-  audioPlayer.pause();
+  audioPlayer.pause(); // start paused
   playBtn.innerHTML = '<i class="fa fa-play"></i>';
 }
 
@@ -107,60 +107,35 @@ progress.addEventListener('input', () => {
 });
 
 // --------------------
-// Drag functionality for mouse & touch
+// Drag functionality for windows
 function makeDraggable(header, container){
   let offsetX = 0, offsetY = 0, isDragging = false;
 
-  // Mouse events
-  header.addEventListener('mousedown', startDrag);
-  document.addEventListener('mousemove', onDrag);
-  document.addEventListener('mouseup', endDrag);
-
-  // Touch events
-  header.addEventListener('touchstart', startDragTouch);
-  document.addEventListener('touchmove', onDragTouch);
-  document.addEventListener('touchend', endDrag);
-
-  function startDrag(e){
+  header.addEventListener('mousedown', (e) => {
     isDragging = true;
     offsetX = e.clientX - container.getBoundingClientRect().left;
     offsetY = e.clientY - container.getBoundingClientRect().top;
     header.style.cursor = 'grabbing';
-  }
+  });
 
-  function onDrag(e){
+  document.addEventListener('mousemove', (e) => {
     if(isDragging){
       container.style.left = (e.clientX - offsetX) + 'px';
       container.style.top = (e.clientY - offsetY) + 'px';
     }
-  }
+  });
 
-  function startDragTouch(e){
-    isDragging = true;
-    const touch = e.touches[0];
-    offsetX = touch.clientX - container.getBoundingClientRect().left;
-    offsetY = touch.clientY - container.getBoundingClientRect().top;
-  }
-
-  function onDragTouch(e){
-    if(isDragging){
-      const touch = e.touches[0];
-      container.style.left = (touch.clientX - offsetX) + 'px';
-      container.style.top = (touch.clientY - offsetY) + 'px';
-    }
-  }
-
-  function endDrag(){
+  document.addEventListener('mouseup', () => {
     isDragging = false;
     header.style.cursor = 'grab';
-  }
+  });
 }
 
 makeDraggable(playerHeader, musicPlayer);
 makeDraggable(aboutHeader, aboutMe);
 
 // --------------------
-// Desktop icons draggable with touch support
+// Desktop icons draggable
 const icons = document.querySelectorAll('.icon');
 const startX = 20;
 let startY = 20;   
@@ -170,7 +145,6 @@ icons.forEach((icon, index) => {
   icon.style.left = startX + 'px';
   icon.style.top = startY + index * spacing + 'px';
 
-  // Mouse drag
   icon.addEventListener('dragstart', (e) => {
     e.dataTransfer.setData('text/plain', null);
     icon.classList.add('dragging');
@@ -184,24 +158,4 @@ icons.forEach((icon, index) => {
     icon.style.left = x + 'px';
     icon.style.top = y + 'px';
   });
-
-  // Touch drag
-  let isTouchDragging = false, touchOffsetX = 0, touchOffsetY = 0;
-
-  icon.addEventListener('touchstart', (e)=>{
-    isTouchDragging = true;
-    const touch = e.touches[0];
-    touchOffsetX = touch.clientX - icon.getBoundingClientRect().left;
-    touchOffsetY = touch.clientY - icon.getBoundingClientRect().top;
-  });
-
-  icon.addEventListener('touchmove', (e)=>{
-    if(isTouchDragging){
-      const touch = e.touches[0];
-      icon.style.left = (touch.clientX - touchOffsetX) + 'px';
-      icon.style.top = (touch.clientY - touchOffsetY) + 'px';
-    }
-  });
-
-  icon.addEventListener('touchend', ()=>{ isTouchDragging = false; });
 });
