@@ -21,11 +21,12 @@ const closeBtn = document.getElementById('closePlayer');
 const progress = document.getElementById('progress');
 const albumArt = document.getElementById('albumArt');
 
-// Example playlist
+// Example playlist 
 const playlist = [
   {file:'ik ben het maar.mp3', art:'https://i.scdn.co/image/ab67616d0000b273b116ea79716f8a6cdd39404b'},
   {file:'Love You Anymore.mp3', art:'https://i.scdn.co/image/ab67616d0000b2735f70e605cc07b6cbb16ec20c'},
-  {file:'Gorgeous.mp3', art:'https://i.scdn.co/image/ab67616d0000b273d9194aa18fa4c9362b47464f'}
+  {file:'Gorgeous.mp3', art:'https://i.scdn.co/image/ab67616d0000b273d9194aa18fa4c9362b47464f'},
+    {file:'simswarm.mp3', art:'https://i.scdn.co/image/ab67616d0000b2739ec66d199c19d227f5c37a68'}
 ];
 let currentIndex = 0;
 
@@ -159,3 +160,4 @@ icons.forEach((icon, index) => {
     icon.style.top = y + 'px';
   });
 });
+
