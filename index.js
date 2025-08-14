@@ -29,7 +29,6 @@ const playlist = [
     {file:'simswarm.mp3', art:'https://i.scdn.co/image/ab67616d0000b2739ec66d199c19d227f5c37a68'}
 ];
 let currentIndex = 0;
-
 // --------------------
 // About Me elements
 const aboutMe = document.getElementById('aboutMe');
@@ -65,8 +64,8 @@ function loadSong(index){
   audioPlayer.src = playlist[index].file;
   songTitle.textContent = playlist[index].file.replace('.mp3','');
   albumArt.src = playlist[index].art;
-  audioPlayer.pause(); // start paused
-  playBtn.innerHTML = '<i class="fa fa-play"></i>'; // show play icon
+  audioPlayer.pause();
+  playBtn.innerHTML = '<i class="fa fa-play"></i>';
 }
 
 // --------------------
@@ -108,35 +107,60 @@ progress.addEventListener('input', () => {
 });
 
 // --------------------
-// Drag functionality for Music Player & About Me
+// Drag functionality for mouse & touch
 function makeDraggable(header, container){
   let offsetX = 0, offsetY = 0, isDragging = false;
 
-  header.addEventListener('mousedown', (e) => {
+  // Mouse events
+  header.addEventListener('mousedown', startDrag);
+  document.addEventListener('mousemove', onDrag);
+  document.addEventListener('mouseup', endDrag);
+
+  // Touch events
+  header.addEventListener('touchstart', startDragTouch);
+  document.addEventListener('touchmove', onDragTouch);
+  document.addEventListener('touchend', endDrag);
+
+  function startDrag(e){
     isDragging = true;
     offsetX = e.clientX - container.getBoundingClientRect().left;
     offsetY = e.clientY - container.getBoundingClientRect().top;
     header.style.cursor = 'grabbing';
-  });
+  }
 
-  document.addEventListener('mousemove', (e) => {
+  function onDrag(e){
     if(isDragging){
       container.style.left = (e.clientX - offsetX) + 'px';
       container.style.top = (e.clientY - offsetY) + 'px';
     }
-  });
+  }
 
-  document.addEventListener('mouseup', () => {
+  function startDragTouch(e){
+    isDragging = true;
+    const touch = e.touches[0];
+    offsetX = touch.clientX - container.getBoundingClientRect().left;
+    offsetY = touch.clientY - container.getBoundingClientRect().top;
+  }
+
+  function onDragTouch(e){
+    if(isDragging){
+      const touch = e.touches[0];
+      container.style.left = (touch.clientX - offsetX) + 'px';
+      container.style.top = (touch.clientY - offsetY) + 'px';
+    }
+  }
+
+  function endDrag(){
     isDragging = false;
     header.style.cursor = 'grab';
-  });
+  }
 }
 
 makeDraggable(playerHeader, musicPlayer);
 makeDraggable(aboutHeader, aboutMe);
 
 // --------------------
-// Desktop icons draggable
+// Desktop icons draggable with touch support
 const icons = document.querySelectorAll('.icon');
 const startX = 20;
 let startY = 20;   
@@ -146,6 +170,7 @@ icons.forEach((icon, index) => {
   icon.style.left = startX + 'px';
   icon.style.top = startY + index * spacing + 'px';
 
+  // Mouse drag
   icon.addEventListener('dragstart', (e) => {
     e.dataTransfer.setData('text/plain', null);
     icon.classList.add('dragging');
@@ -159,5 +184,24 @@ icons.forEach((icon, index) => {
     icon.style.left = x + 'px';
     icon.style.top = y + 'px';
   });
-});
 
+  // Touch drag
+  let isTouchDragging = false, touchOffsetX = 0, touchOffsetY = 0;
+
+  icon.addEventListener('touchstart', (e)=>{
+    isTouchDragging = true;
+    const touch = e.touches[0];
+    touchOffsetX = touch.clientX - icon.getBoundingClientRect().left;
+    touchOffsetY = touch.clientY - icon.getBoundingClientRect().top;
+  });
+
+  icon.addEventListener('touchmove', (e)=>{
+    if(isTouchDragging){
+      const touch = e.touches[0];
+      icon.style.left = (touch.clientX - touchOffsetX) + 'px';
+      icon.style.top = (touch.clientY - touchOffsetY) + 'px';
+    }
+  });
+
+  icon.addEventListener('touchend', ()=>{ isTouchDragging = false; });
+});
