@@ -11,6 +11,7 @@ body, html {
   height: 100%;
 }
 
+/* Desktop */
 .desktop {
   width: 100%;
   height: 100%;
@@ -19,6 +20,7 @@ body, html {
   overflow: hidden;
 }
 
+/* Desktop icons */
 .icon {
   width: 80px;
   text-align: center;
@@ -38,6 +40,7 @@ body, html {
   color: white;
 }
 
+/* Taskbar */
 .taskbar {
   position: fixed;
   bottom: 0;
@@ -65,6 +68,17 @@ body, html {
   background-color: rgba(255,255,255,0.2);
 }
 
+.taskbar-icons {
+  display: flex;
+  gap: 10px;
+  margin-left: 10px;
+}
+
+.taskbar-icons i {
+  cursor: pointer;
+  font-size: 18px;
+}
+
 .time {
   margin-left: auto;
   font-size: 14px;
@@ -82,7 +96,6 @@ body, html {
   left: 50px;
   display: none;
   z-index: 1001;
-  font-family: "Segoe UI", sans-serif;
   box-shadow: 0 8px 20px rgba(0,0,0,0.5);
   height: 300px;
 }
@@ -162,7 +175,6 @@ body, html {
   left: 100px;
   display: none;
   z-index: 1001;
-  font-family: "Segoe UI", sans-serif;
   box-shadow: 0 6px 15px rgba(0,0,0,0.3);
   height: 300px;
 }
@@ -202,12 +214,22 @@ body, html {
 .medium-text { font-size: 18px; margin: 5px 0; }
 .small-text { font-size: 14px; margin: 3px 0; }
 .tiny-text { font-size: 10px; margin: 2px 0; }
-
-/* Mobile / responsive adjustments */
-@media (max-width: 768px){
-  .desktop { overflow-x: hidden; } /* prevent right crop */
-  .icon { width: 60px; font-size: 10px; }
-  .music-player, .about-me { width: 90%; left: 5% !important; bottom: 80px; }
-  .album-art, .profile-pic { width: 100px; height: 100px; }
-  .controls button { padding: 8px 10px; font-size: 14px; }
+/* Mobile Layout: clamp background 1/4 from the right */
+/* Mobile Layout: background halfway from center to right */
+@media (max-width: 768px) {
+  .desktop {
+    background-position: 25% center; /* halfway from center to right */
+    background-size: cover;
+  }
+  
+  .music-player {
+    left: 20px;
+    width: 90%;
+  }
+  
+  .about-me {
+    left: 20px;
+    width: 90%;
+  }
 }
+
