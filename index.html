@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Windows 8 Web</title>
+  <link rel="stylesheet" href="index.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+<!-- Modern Music Player -->
+<div class="music-player" id="musicPlayer">
+  <div class="player-header" id="playerHeader">
+    <span id="songTitle">No song loaded</span>
+    <button id="closePlayer">&times;</button>
+  </div>
+  <div class="player-body">
+    <img src="https://via.placeholder.com/120" alt="Album Art" class="album-art" id="albumArt">
+    <audio id="audioPlayer"></audio>
+    <div class="progress-container">
+      <input type="range" id="progress" value="0" min="0" max="100">
+    </div>
+  </div>
+  <div class="controls">
+    <button id="prev"><i class="fa fa-backward"></i></button>
+    <button id="play"><i class="fa fa-pause"></i></button>
+    <button id="next"><i class="fa fa-forward"></i></button>
+  </div>
+</div>
+<!-- About Me Window -->
+<div class="about-me" id="aboutMe">
+  <div class="window-header" id="aboutHeader">
+    <span>About Me</span>
+    <button id="closeAbout">&times;</button>
+  </div>
+  <div class="window-body">
+    <img src=pfp.jpg class="profile-pic">
+    <p class="medium-text">Immersion</p>
+    <p class="small-text">They/Them</p>
+    <p class="tiny-text">Hiii!</p>
+  </div>
+</div>
+
+  <div class="desktop">
+
+    <div class="icon" draggable="true">
+      <i class="fa fa-user"></i>
+      <span>About Me</span>
+    </div>
+    <div class="icon" draggable="true">
+      <i class="fa fa-music"></i>
+      <span>Music Taste</span>
+    </div>
+    <div class="icon" draggable="true">
+      <i class="fa fa-folder"></i>
+      <span>Projects</span>
+    </div>
+    <div class="icon" draggable="true">
+      <i class="fa fa-globe"></i>
+      <span>Intrests</span>
+    </div>
+  </div>
+<div class="taskbar">
+  <div class="start-button"><i class="fa-brands fa-windows"></i></div>
+  <div class="time" id="time"></div>
+</div>
+
+  <script src="index.js"></script>
+</body>
+</html>
