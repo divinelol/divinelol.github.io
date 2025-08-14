@@ -6,7 +6,6 @@
   font-family: "Segoe UI", sans-serif;
 }
 
-
 body, html {
   width: 100%;
   height: 100%;
@@ -53,7 +52,6 @@ body, html {
   z-index: 1000;
 }
 
-
 .start-button {
   width: 40px;
   height: 40px;
@@ -67,17 +65,12 @@ body, html {
   background-color: rgba(255,255,255,0.2);
 }
 
-
-.taskbar-icons {
-  display: flex;
-  gap: 10px;
-  margin-left: 10px;
+.time {
+  margin-left: auto;
+  font-size: 14px;
+  color: white;
 }
 
-.taskbar-icons i {
-  cursor: pointer;
-  font-size: 18px;
-}
 /* Modern Music Player */
 .music-player {
   position: fixed;
@@ -93,57 +86,6 @@ body, html {
   box-shadow: 0 8px 20px rgba(0,0,0,0.5);
   height: 300px;
 }
-/* About Me Window */
-.about-me {
-  position: fixed;
-  width: 300px;
-  background: #f0f0f0;
-  border: 2px solid #999;
-  border-radius: 8px;
-  bottom: 150px;
-  left: 100px;
-  display: none;
-  z-index: 1001;
-  font-family: "Segoe UI", sans-serif;
-  box-shadow: 0 6px 15px rgba(0,0,0,0.3);
-    height: 300px;
-}
-
-.window-header {
-  background: #0078d7;
-  color: white;
-  padding: 8px 12px;
-  font-weight: bold;
-  display: flex;
-  justify-content: space-between;
-  cursor: grab;
-  border-top-left-radius: 8px;
-  border-top-right-radius: 8px;
-}
-
-.window-header button {
-  background: none;
-  border: none;
-  color: white;
-  font-size: 16px;
-  cursor: pointer;
-}
-
-.window-body {
-  text-align: center;
-  padding: 15px;
-}
-
-.profile-pic {
-  width: 120px;
-  height: 120px;
-  border-radius: 50%;
-  margin-bottom: 10px;
-}
-
-.medium-text { font-size: 18px; margin: 5px 0; }
-.small-text { font-size: 14px; margin: 3px 0; }
-.tiny-text { font-size: 10px; margin: 2px 0; }
 
 .player-header {
   display: flex;
@@ -202,15 +144,70 @@ body, html {
   border-radius: 50%;
   cursor: pointer;
   font-size: 16px;
-  transition:  0.2s;
+  transition: 0.2s;
 }
 
 .controls button:hover {
   background: #ff2c3b;
 }
 
-.time {
-  margin-left: auto;
-  font-size: 14px;
+/* About Me Window */
+.about-me {
+  position: fixed;
+  width: 300px;
+  background: #f0f0f0;
+  border: 2px solid #999;
+  border-radius: 8px;
+  bottom: 150px;
+  left: 100px;
+  display: none;
+  z-index: 1001;
+  font-family: "Segoe UI", sans-serif;
+  box-shadow: 0 6px 15px rgba(0,0,0,0.3);
+  height: 300px;
+}
+
+.window-header {
+  background: #0078d7;
   color: white;
+  padding: 8px 12px;
+  font-weight: bold;
+  display: flex;
+  justify-content: space-between;
+  cursor: grab;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+}
+
+.window-header button {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.window-body {
+  text-align: center;
+  padding: 15px;
+}
+
+.profile-pic {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  margin-bottom: 10px;
+}
+
+.medium-text { font-size: 18px; margin: 5px 0; }
+.small-text { font-size: 14px; margin: 3px 0; }
+.tiny-text { font-size: 10px; margin: 2px 0; }
+
+/* Mobile / responsive adjustments */
+@media (max-width: 768px){
+  .desktop { overflow-x: hidden; } /* prevent right crop */
+  .icon { width: 60px; font-size: 10px; }
+  .music-player, .about-me { width: 90%; left: 5% !important; bottom: 80px; }
+  .album-art, .profile-pic { width: 100px; height: 100px; }
+  .controls button { padding: 8px 10px; font-size: 14px; }
 }
